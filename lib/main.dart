@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jica/src/utils/colors.dart';
+import 'package:jica/src/utils/routes.dart';
 import 'src/ui/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         accentColor: LIGHT_GREEN,
       ),
       home: WelcomeScreen(),
+      routes: routes,
     );
   }
 }

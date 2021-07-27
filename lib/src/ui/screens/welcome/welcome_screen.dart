@@ -1,11 +1,13 @@
 import "package:flutter/material.dart";
+import 'package:jica/src/ui/screens/auth/login/login_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import "package:jica/src/ui/widgets/custom_raised_button.dart";
-import "package:jica/src/ui/widgets/my_custom_clipper.dart";
 import 'package:jica/src/ui/widgets/shadow_text.dart';
 import "package:jica/src/utils/colors.dart";
 
 class WelcomeScreen extends StatelessWidget {
+  static final String routeName = '/welcome';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,12 +69,12 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(height: 30),
               Container(
                 width: MediaQuery.of(context).size.width / 1.5,
-                height: 40,
+                height: 50,
                 child: CustomRaisedButton(
                   labelText: "Get Started",
                   textColor: Colors.white,
                   radius: 10,
-                  onPressed: onPressed,
+                  onPressed: () => onPressed(context),
                   fillColor: kLightAccent,
                 ),
               ),
@@ -83,5 +85,7 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 
-  void onPressed() {}
+  void onPressed(BuildContext context) {
+    Navigator.pushNamed(context, LoginScreen.routeName);
+  }
 }
