@@ -29,10 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CovidLogo(),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
