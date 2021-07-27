@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jica/src/ui/screens/auth/register/register_screen.dart';
 import 'package:jica/src/ui/screens/welcome/welcome_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
@@ -31,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20),
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(10),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
@@ -47,16 +48,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.fromLTRB(0, 0, 20, 10),
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                    color: kLightAccent,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Trocchi',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    RegisterScreen.routeName,
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.fromLTRB(0, 0, 20, 10),
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      color: kLightAccent,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Trocchi',
+                    ),
                   ),
                 ),
               ),
