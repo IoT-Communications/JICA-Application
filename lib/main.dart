@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jica/src/ui/screens/auth/verify_account/verify_account_screen.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/routes.dart';
 import 'src/ui/screens/welcome/welcome_screen.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         accentColor: LIGHT_GREEN,
       ),
-      home: VerifyAccountScreen(),
+      home: WelcomeScreen(),
       routes: routes,
     );
   }

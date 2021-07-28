@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jica/src/ui/screens/auth/register/register_screen.dart';
-import 'package:jica/src/ui/screens/welcome/welcome_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
