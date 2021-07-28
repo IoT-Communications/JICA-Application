@@ -6,7 +6,7 @@ class CustomRaisedButton extends StatelessWidget {
   final Color? highlightColor;
   final Color? fillColor;
   final Color? textColor;
-  final Function? onPressed;
+  final void Function()? onPressed;
   final double? radius;
 
   const CustomRaisedButton({
@@ -43,11 +43,11 @@ class CustomRaisedButton extends StatelessWidget {
               fontFamily: 'Trocchi',
             ),
           ),
-          SizedBox(width: 20),
-          Icon(Icons.arrow_forward_ios)
+          // SizedBox(width: 20),
+          // Icon(Icons.arrow_forward_ios)
         ],
       ),
-      onPressed: () => onPressed,
+      onPressed: onPressed,
     );
   }
 }
