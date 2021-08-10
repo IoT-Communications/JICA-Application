@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jica/src/ui/screens/auth/register/register_screen.dart';
-import 'package:jica/src/ui/screens/welcome/welcome_screen.dart';
+import 'package:jica/src/ui/screens/base/base_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
@@ -129,5 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void onPressed() {}
+  void onPressed() {
+    Navigator.pushReplacementNamed(
+      context,
+      BaseScreen.routeName,
+    );
+  }
 }

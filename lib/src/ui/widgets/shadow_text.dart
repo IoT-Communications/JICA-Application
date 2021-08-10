@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ShadowText extends StatelessWidget {
-  final String? data;
-  final TextStyle? style;
-  final TextAlign? textAlign;
-  final TextDirection? textDirection;
-  final bool? softWrap;
-  final TextOverflow? overflow;
-  final double? textScaleFactor;
-  final int? maxLines;
+  final String data;
+  final TextStyle style;
+  final TextAlign textAlign;
+  final TextDirection textDirection;
+  final bool softWrap;
+  final TextOverflow overflow;
+  final double textScaleFactor;
+  final int maxLines;
 
   const ShadowText(
     this.data, {
-    Key? key,
+    Key key,
     this.style,
     this.textAlign,
     this.textDirection,
@@ -30,8 +30,8 @@ class ShadowText extends StatelessWidget {
             top: 2.0,
             left: 2.0,
             child: new Text(
-              data!,
-              style: style?.copyWith(color: Colors.black.withOpacity(0.5)),
+              data,
+              style: style.copyWith(color: Colors.black.withOpacity(0.5)),
               textAlign: textAlign,
               textDirection: textDirection,
               softWrap: softWrap,
@@ -41,7 +41,7 @@ class ShadowText extends StatelessWidget {
             ),
           ),
           new Text(
-            data!,
+            data,
             style: style,
             textAlign: textAlign,
             textDirection: textDirection,

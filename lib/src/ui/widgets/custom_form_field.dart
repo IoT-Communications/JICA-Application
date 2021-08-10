@@ -3,19 +3,19 @@ import 'package:jica/src/utils/colors.dart';
 import 'package:recase/recase.dart';
 
 class CustomFormField extends StatelessWidget {
-  final bool? obsecure;
-  final IconData? prefixIconData;
-  final IconData? suffixIconData;
-  final String? labelText;
-  final String? helperText;
-  final TextEditingController? controller;
+  final bool obsecure;
+  final IconData prefixIconData;
+  final IconData suffixIconData;
+  final String labelText;
+  final String helperText;
+  final TextEditingController controller;
   final double radius;
-  final Function? validator;
-  final Function? onSuffixTap;
-  final FocusNode? focusNode;
+  final Function validator;
+  final Function onSuffixTap;
+  final FocusNode focusNode;
 
   const CustomFormField({
-    Key? key,
+    Key key,
     this.obsecure,
     this.prefixIconData,
     this.suffixIconData,
@@ -94,7 +94,7 @@ class CustomFormField extends StatelessWidget {
         autocorrect: true,
         validator: (text) {
           if (validator != null) {
-            return validator!(label: labelText, value: text);
+            return validator(label: labelText, value: text);
           }
           return null;
         },

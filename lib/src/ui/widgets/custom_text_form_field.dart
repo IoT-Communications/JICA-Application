@@ -3,7 +3,7 @@ import 'custom_form_field.dart';
 
 class CustomTextFormField extends CustomFormField {
   const CustomTextFormField({
-    Key? key,
+    Key key,
     prefixIconData,
     suffixIconData,
     @required labelText,

@@ -22,6 +22,7 @@ class WelcomeScreen extends StatelessWidget {
                 Container(
                   child: Column(
                     children: [
+                      SizedBox(height: 100),
                       CovidLogo(),
                       SizedBox(height: 20),
                       ShadowText(

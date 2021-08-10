@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomRaisedButton extends StatelessWidget {
-  final String? labelText;
-  final Color? splashColor;
-  final Color? highlightColor;
-  final Color? fillColor;
-  final Color? textColor;
-  final void Function()? onPressed;
-  final double? radius;
+  final String labelText;
+  final Color splashColor;
+  final Color highlightColor;
+  final Color fillColor;
+  final Color textColor;
+  final void Function() onPressed;
+  final double radius;
 
   const CustomRaisedButton({
-    Key? key,
+    Key key,
     @required this.labelText,
     @required this.onPressed,
     this.splashColor,
@@ -30,12 +30,12 @@ class CustomRaisedButton extends StatelessWidget {
       color: fillColor ?? Theme.of(context).accentColor,
       disabledColor: Colors.amberAccent[600],
       shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(radius!)),
+          borderRadius: new BorderRadius.circular(radius)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            labelText!,
+            labelText,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,

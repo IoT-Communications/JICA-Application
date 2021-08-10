@@ -6,12 +6,12 @@ import 'package:recase/recase.dart';
 ValueNotifier<bool> isObsecure = ValueNotifier<bool>(true);
 
 class CustomPasswordFormField extends StatelessWidget {
-  final TextEditingController? controller;
-  final String? labelText;
-  final FocusNode? focusNode;
+  final TextEditingController controller;
+  final String labelText;
+  final FocusNode focusNode;
 
   //need to pass this var incase the field is confirm password;
-  final String? password;
+  final String password;
 
   CustomPasswordFormField({
     this.controller,
