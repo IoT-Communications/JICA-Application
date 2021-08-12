@@ -1,3 +1,3 @@
 # JICA-Application
 
-Jamaica Covid 19 Contact Tracing Application
+LPWAN Service for COVID-19 Containment and Contact Tracing
