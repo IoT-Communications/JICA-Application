@@ -1,12 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jica">
+    package="com.iotcomms.jica">
   <application
         android:label="jica"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
               android:name="com.google.android.geo.API_KEY"
-              android:value="AIzaSyCYrCd3hHQFveMAKJRluODrKwWVVDi08zk"/>
+              android:value="AIzaSyAMzrL6HXb_HZeY2MGzTp64_xjVqgI31kw"/>
+              <!-- AIzaSyCYrCd3hHQFveMAKJRluODrKwWVVDi08zk -->
               
         <activity
             android:name=".MainActivity"

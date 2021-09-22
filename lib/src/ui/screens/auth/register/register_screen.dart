@@ -1,12 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:jica/src/ui/screens/welcome/welcome_screen.dart';
+import 'package:jica/src/services/auth_service.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/constants.dart';
+import 'package:jica/src/utils/dialogs.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   static final String routeName = '/register';
@@ -17,7 +19,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 20),
                 CustomTextFormField(
                   labelText: kEmail,
-                  controller: _usernameController,
+                  controller: _emailController,
                   prefixIconData: Icons.email,
                 ),
                 SizedBox(height: 20),
@@ -141,5 +145,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void onPressed() {}
+  Future<void> onPressed() async {
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    Dialogs.showLoadingDialog(context);
+    await context.read<AuthService>().signUp(username, email, password);
+    Dialogs.closeLoadingDialog(context);
+  }
 }

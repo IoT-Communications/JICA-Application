@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:jica/src/ui/screens/auth/login/login_screen.dart';
+import 'package:jica/src/ui/screens/auth/auth_wrapper/auth_wrapper.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import "package:jica/src/ui/widgets/custom_raised_button.dart";
 import 'package:jica/src/ui/widgets/shadow_text.dart';
@@ -89,6 +89,6 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   void onPressed(BuildContext context) {
-    Navigator.pushNamed(context, LoginScreen.routeName);
+    Navigator.pushNamed(context, AuthWrapper.routeName);
   }
 }

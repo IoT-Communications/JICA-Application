@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jica/src/services/auth_service.dart';
 import 'package:jica/src/ui/screens/auth/register/register_screen.dart';
 import 'package:jica/src/ui/screens/base/base_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
@@ -7,6 +8,8 @@ import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/constants.dart';
+import 'package:jica/src/utils/dialogs.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static final String routeName = '/login';
@@ -16,8 +19,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,9 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               CustomTextFormField(
-                labelText: kUsername,
-                controller: _usernameController,
-                prefixIconData: Icons.person_pin_circle_sharp,
+                labelText: kEmail,
+                controller: _emailController,
+                prefixIconData: Icons.email,
               ),
               SizedBox(height: 20),
               CustomPasswordFormField(
@@ -134,5 +143,14 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
       BaseScreen.routeName,
     );
+  }
+
+  Future<void> signIn() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    Dialogs.showLoadingDialog(context);
+    await context.read<AuthService>().signIn(email, password);
+    Dialogs.closeLoadingDialog(context);
   }
 }

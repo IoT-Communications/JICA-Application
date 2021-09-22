@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "550126609766",
+    "project_id": "jica-application",
+    "storage_bucket": "jica-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550126609766:android:398a6ec276c7a5fcac14a7",
+        "android_client_info": {
+          "package_name": "com.iotcomms.jica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550126609766-vg2ae185spa7215vtqr2phd8fqd9b4vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_jlKM7bMQPbt-r0hv4hhZ8wu7-PtJKn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550126609766-vg2ae185spa7215vtqr2phd8fqd9b4vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
