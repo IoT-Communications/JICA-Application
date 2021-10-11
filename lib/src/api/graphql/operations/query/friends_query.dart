@@ -1,0 +1,38 @@
+String listFriends = """
+query findFriends{
+  findFriends{
+    error{
+        message
+    }
+    users{
+      id
+      name
+      surname
+      profile{
+        id
+        username
+        photo
+        quote
+      }
+      following{
+        id
+        name
+        profile{
+          id
+          photo
+          username
+        }
+      }
+      followers{
+        id
+        name
+        profile{
+          id
+          username
+          photo
+        }
+      }
+    }
+  }
+}
+""";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jica/src/utils/colors.dart';
-import 'package:jica/src/utils/constants.dart';
+import 'package:jica/src/utils/constants/const.dart';
 import 'package:recase/recase.dart';
 
 ValueNotifier<bool> isObsecure = ValueNotifier<bool>(true);

@@ -8,7 +8,7 @@ class DirectionsRepository {
       'https://maps.googleapis.com/maps/api/directions/json?';
 
   final Dio _dio;
-  final String googleAPIKey = 'AIzaSyAQvZhDnP4hpEsi6EcGBYmp-Pq5lyJv9dE';
+  final String googleAPIKey = 'AIzaSyAMzrL6HXb_HZeY2MGzTp64_xjVqgI31kw';
 
   DirectionsRepository({Dio dio}) : _dio = dio ?? Dio();
 

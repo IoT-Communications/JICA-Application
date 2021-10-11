@@ -1,0 +1,150 @@
+String getChatsQuery = """
+query GetChats{
+  getChats{
+    id
+    name
+    read
+    members{
+			id
+			name
+			profile{
+        id
+        photo
+        username
+			}
+		}
+		messages{
+      id
+      read
+      text
+      sender{
+        id
+        name
+      }
+		}
+		lastSender{
+      id
+		}
+    lastMessage
+    createdAt
+    updatedAt
+  }
+}
+""";
+
+String deleteChatMutation = """
+mutation DeleteChat(\$chatId: String){
+  deleteChat(chatId: \$chatId){
+    error{
+      path
+      message
+    }
+    id
+  }
+}
+""";
+
+String getFriendDetails = """
+query getUser(\$idOrUsername: String){
+  getUser(idOrUsername:\$idOrUsername){
+    id
+    name
+    surname
+		email
+		posts{
+		  id
+		  content
+		  visible
+      file
+      fileType
+		  createdAt
+		  updatedAt
+		  comments{
+        id
+      }
+      likes{
+        id
+        author{
+          id
+          name
+          profile{
+            id
+            username
+            photo
+          }
+        }
+      }
+      community{
+        id
+        name
+        logo
+        members{
+          id
+          name
+        }
+        owners{
+          id
+          name
+        }
+      }
+		}
+    profile{
+      id
+      username
+			dob
+			location
+			profession
+			skills
+			quote
+      photo
+      createdAt
+      updatedAt
+    }
+		following{
+			id
+			name
+		}
+		followers{
+			id
+			name
+			profile{
+			  id
+			  username
+			  photo
+			}
+		}
+  }
+}
+""";
+
+String getMessagesQuery = """
+query getMessages(\$chatId: String!){
+  getMessages(chatId: \$chatId){
+    error{
+      path
+      message
+    }
+    chat{
+			id
+			name
+			lastMessage
+      messages{
+        id
+				text
+				me
+				picture
+				read
+				createdAt
+				updatedAt
+        sender{
+          id
+          name
+          email
+        }
+      }
+			createdAt
+			updatedAt
+		}
+	}
+}
+""";

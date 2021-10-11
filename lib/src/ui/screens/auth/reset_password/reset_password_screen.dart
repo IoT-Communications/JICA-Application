@@ -4,7 +4,7 @@ import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
-import 'package:jica/src/utils/constants.dart';
+import 'package:jica/src/utils/constants/const.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static final String routeName = '/reset_password';

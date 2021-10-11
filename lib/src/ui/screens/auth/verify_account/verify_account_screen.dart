@@ -3,7 +3,7 @@ import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
-import 'package:jica/src/utils/constants.dart';
+import 'package:jica/src/utils/constants/const.dart';
 
 class VerifyAccountScreen extends StatefulWidget {
   static final String routeName = '/verify_account';

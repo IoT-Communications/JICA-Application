@@ -1,9 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jica/src/services/auth_service.dart';
-import 'package:jica/src/services/home_service.dart';
-import 'package:jica/src/services/profile_service.dart';
-import 'package:jica/src/services/watch_service.dart';
+import 'package:jica/src/providers/app_state.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/routes.dart';
 import 'package:provider/provider.dart';
@@ -21,13 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthService()),
-        ChangeNotifierProvider(create: (_) => HomeService()),
-        ChangeNotifierProvider(create: (_) => ProfileService()),
-        ChangeNotifierProvider(create: (_) => WatchService()),
-        StreamProvider(
-            create: (context) => context.read<AuthService>().authStateChanges,
-            initialData: null)
+        ChangeNotifierProvider<AppState>(create: (_) => AppState()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

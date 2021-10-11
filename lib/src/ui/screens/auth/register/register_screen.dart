@@ -1,14 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:jica/src/services/auth_service.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
-import 'package:jica/src/utils/constants.dart';
-import 'package:jica/src/utils/dialogs.dart';
-import 'package:provider/provider.dart';
+import 'package:jica/src/utils/constants/const.dart';
 
 class RegisterScreen extends StatefulWidget {
   static final String routeName = '/register';
@@ -149,8 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
-    Dialogs.showLoadingDialog(context);
-    await context.read<AuthService>().signUp(username, email, password);
-    Dialogs.closeLoadingDialog(context);
+    // Dialogs.showLoadingDialog(context);
+    // Dialogs.closeLoadingDialog(context);
   }
 }

@@ -1,0 +1,105 @@
+String commentSub = """
+subscription comment(\$id: String!){
+  comment(id:\$id){
+    data{
+      id
+      description
+      picture
+      replies{
+        id
+        description
+        picture
+        author{
+          id
+          name
+          profile{
+            id
+            username
+            photo
+          }
+        }
+      }
+      reactions{
+        id
+        name
+        author{
+          id
+          name
+          profile{
+            id
+            username
+          }
+        }
+      }
+      author{
+        id
+        name
+        profile{
+          id
+          username
+          photo
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    message
+  }
+}
+""";
+
+String commentsSub = """
+subscription comments(\$postId: String!){
+  comments(postId:\$id){
+    data{
+      id
+      description
+      picture
+      replies{
+        id
+        description
+        picture
+        author{
+          id
+          name
+          profile{
+            id
+            username
+            photo
+          }
+        }
+      }
+      reactions{
+        id
+        name
+        author{
+          id
+          name
+          profile{
+            id
+            username
+          }
+        }
+      }
+      author{
+        id
+        name
+        profile{
+          id
+          username
+          photo
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    message
+  }
+}
+""";
+
+String countPostComments = """
+subscription countComments(\$postId: String!){
+  countComments(postId: \$postId)
+}
+""";

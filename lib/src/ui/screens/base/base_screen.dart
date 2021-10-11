@@ -87,9 +87,9 @@ class BaseScreen extends StatelessWidget {
             ),
             ListTile(
               title: Text('Logout'),
-              leading: Icon(Icons.offline_pin),
+              leading: Icon(Icons.power_settings_new),
               onTap: () {
-                print("Clicked");
+                signOut(context);
               },
             ),
           ],
@@ -102,4 +102,6 @@ class BaseScreen extends StatelessWidget {
       //bottomNavigationBar: Container(),
     );
   }
+
+  Future<void> signOut(BuildContext context) async {}
 }
