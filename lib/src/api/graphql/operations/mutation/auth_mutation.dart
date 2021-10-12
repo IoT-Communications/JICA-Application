@@ -1,4 +1,4 @@
-String signupMutation = """
+String signUpMutation = """
 mutation register(\$email:String!, \$password:String!,\$username:String!){
   register(email:\$email,password:\$password,username:\$username){
     error{

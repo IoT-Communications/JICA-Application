@@ -1,6 +1,7 @@
 import 'package:graphql/client.dart';
 import 'package:hive/hive.dart';
 import 'package:jica/src/utils/constants/const.dart';
+import 'package:jica/src/utils/debugBro.dart';
 
 class GraphQLClientApiConfig {
   GraphQLClient get client => initClient();
@@ -12,6 +13,7 @@ class GraphQLClientApiConfig {
     final String _token = _box.get(kToken);
 
     //create a authentication link
+    logger.e(_token);
     final AuthLink _authLink = AuthLink(
       getToken: () => _token == null ? null : 'Bearer $_token',
     );

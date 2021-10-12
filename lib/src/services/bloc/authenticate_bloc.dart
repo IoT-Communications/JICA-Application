@@ -41,8 +41,8 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
     add(
       GraphqlMutateEvent<Map<String, dynamic>>(
         options: mutationOptions(
-          signupMutation,
-          variables,
+          query: signUpMutation,
+          variables: variables,
         ),
         data: parseData(variables),
       ),
@@ -65,8 +65,8 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
     add(GraphqlMutateEvent(
         data: data,
         options: mutationOptions(
-          verifyEmailOrPhoneMutation,
-          data,
+          query: verifyEmailOrPhoneMutation,
+          variables: data,
         )));
   }
 
@@ -75,15 +75,16 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
       'password': password,
     };
     add(GraphqlMutateEvent(
-        data: data, options: mutationOptions(resetPasswordMutation, data)));
+        data: data,
+        options:
+            mutationOptions(query: resetPasswordMutation, variables: data)));
   }
 
   void sendVerificationEmail() {
     add(GraphqlMutateEvent(
         data: {},
         options: mutationOptions(
-          resendEmailVerificationMutation,
-          {},
+          query: resendEmailVerificationMutation,
         )));
   }
 
@@ -94,8 +95,8 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
     add(GraphqlMutateEvent(
         data: data,
         options: mutationOptions(
-          confirmVerificationCodeMutation,
-          data,
+          query: confirmVerificationCodeMutation,
+          variables: data,
         )));
   }
 
@@ -104,8 +105,7 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
       GraphqlMutateEvent(
         data: {},
         options: mutationOptions(
-          updateAuthStatusMutation,
-          {},
+          query: updateAuthStatusMutation,
         ),
       ),
     );
@@ -115,11 +115,14 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
     Map<String, dynamic> data = {
       'pin': smsCode,
     };
-    add(GraphqlMutateEvent(
+    add(
+      GraphqlMutateEvent(
         data: data,
         options: mutationOptions(
-          storeVerificationCodeMutation,
-          data,
-        )));
+          query: storeVerificationCodeMutation,
+          variables: data,
+        ),
+      ),
+    );
   }
 }

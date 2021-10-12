@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:jica/src/core/models/device_location.dart';
 import 'package:jica/src/ui/screens/base/widgets/directions_model.dart';
 import 'package:jica/src/ui/screens/base/widgets/directions_repository.dart';
+import 'package:jica/src/utils/debugBro.dart';
 
 class MapScreen extends StatefulWidget {
+  final Map<String, dynamic> groupedDeviceLocations;
+
+  const MapScreen({Key key, @required this.groupedDeviceLocations})
+      : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
-  static const _initialCameraPosition = CameraPosition(
-    target: LatLng(37.773972, -122.431297),
+  CameraPosition _initialCameraPosition = CameraPosition(
+    target: LatLng(-24.653257, 25.906792),
     zoom: 11.5,
   );
 
@@ -18,6 +24,8 @@ class _MapScreenState extends State<MapScreen> {
   Marker _origin;
   Marker _destination;
   Directions _info;
+  Set<Marker> markers = Set();
+  int countMarkers = 0;
 
   @override
   void dispose() {
@@ -26,7 +34,34 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    //logger.e(markers.first);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (widget.groupedDeviceLocations != null &&
+        widget.groupedDeviceLocations.isNotEmpty) {
+      widget.groupedDeviceLocations?.forEach((k, v) {
+        countMarkers++;
+
+        List<DeviceLocation> routeDetails = v.reversed.toList();
+        double lat = routeDetails[0].latitude;
+        double long = routeDetails[0].longitude;
+
+        markers.add(
+          Marker(
+              markerId: MarkerId('$k'),
+              infoWindow: InfoWindow(title: 'Device $k'),
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                  BitmapDescriptor.hueGreen),
+              position: LatLng(lat, long),
+              onTap: () => onMarkerTapped(deviceId: k, routeDetails: v)),
+        );
+      });
+    }
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -37,43 +72,7 @@ class _MapScreenState extends State<MapScreen> {
             initialCameraPosition: _initialCameraPosition,
             onMapCreated: (controller) => _googleMapController = controller,
             mapType: MapType.hybrid,
-            markers: {
-              Marker(
-                markerId: const MarkerId('marker1'),
-                infoWindow: const InfoWindow(title: 'Destination'),
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueGreen),
-                position: LatLng(37.473972, -122.431297),
-              ),
-              Marker(
-                markerId: const MarkerId('marker2'),
-                infoWindow: const InfoWindow(title: 'Marker'),
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueRed),
-                position: LatLng(37.573972, -122.431297),
-              ),
-              Marker(
-                markerId: const MarkerId('marker3'),
-                infoWindow: const InfoWindow(title: 'Destination'),
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueOrange),
-                position: LatLng(37.673972, -122.431297),
-              ),
-              Marker(
-                markerId: const MarkerId('marker4'),
-                infoWindow: const InfoWindow(title: 'Destination'),
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueViolet),
-                position: LatLng(37.673972, -122.331297),
-              ),
-              Marker(
-                markerId: const MarkerId('marker5'),
-                infoWindow: const InfoWindow(title: 'Destination'),
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueYellow),
-                position: LatLng(37.873972, -122.331297),
-              ),
-            },
+            markers: markers,
             polylines: {
               if (_info != null)
                 Polyline(
@@ -163,4 +162,6 @@ class _MapScreenState extends State<MapScreen> {
       // Get directions
     }
   }
+
+  onMarkerTapped({String deviceId, List<DeviceLocation> routeDetails}) {}
 }
