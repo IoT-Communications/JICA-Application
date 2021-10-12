@@ -1,16 +1,21 @@
+String signInQuery = """
+query login(\$email:String!, \$password:String!, \$fcmToken:String!){
+  login(email:\$email,password:\$password, fcmToken:\$fcmToken){
+    error{
+      path
+      message
+    }
+    token
+  }
+}
+""";
+
 String me = """
 query me{
   me{
     id
-    name
-    surname
-    profile{
-      id
-      photo
-      username
-      createdAt
-      updatedAt
-    }
+    username
+    email
   }
 }
 """;

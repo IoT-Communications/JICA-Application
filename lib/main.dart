@@ -1,14 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jica/src/providers/app_state.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/routes.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'src/ui/screens/welcome/welcome_screen.dart';
+import 'src/utils/constants/const.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Hive.initFlutter();
+
+  //Graphql cache directory
+  var appDir = await getApplicationDocumentsDirectory();
+  await Hive.openBox(kSession);
+  await HiveStore.open(path: appDir.path);
   runApp(MyApp());
 }
 

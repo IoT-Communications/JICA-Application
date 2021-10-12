@@ -1,38 +1,38 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jica/src/providers/app_state.dart';
 import 'package:jica/src/services/bloc/authenticate_bloc.dart';
 import 'package:jica/src/services/bloc/base_graphql_bloc.dart';
-import 'package:jica/src/ui/screens/auth/register/register_screen.dart';
-import 'package:jica/src/ui/screens/base/base_screen.dart';
+import 'package:jica/src/ui/screens/auth/login/login_screen.dart';
 import 'package:jica/src/ui/widgets/covid_logo.dart';
 import 'package:jica/src/ui/widgets/custom_password_form_field.dart';
 import 'package:jica/src/ui/widgets/custom_raised_button.dart';
 import 'package:jica/src/ui/widgets/custom_text_form_field.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/constants/const.dart';
+import 'package:flutter/gestures.dart';
 import 'package:jica/src/utils/debugBro.dart';
 import 'package:jica/src/utils/dialogs.dart';
 import 'package:jica/src/utils/error_message.dart';
 import 'package:jica/src/utils/toast.dart';
 import 'package:provider/provider.dart';
 
-class LoginForm extends StatefulWidget {
+class RegisterForm extends StatefulWidget {
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  _RegisterFormState createState() => _RegisterFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _RegisterFormState extends State<RegisterForm> {
+  TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticateBloc, GraphqlState>(
-      builder: (BuildContext context, GraphqlState state) {
-        return SafeArea(
-          child: Material(
+      builder: (context, state) {
+        return Scaffold(
+          body: Container(
+            margin: EdgeInsets.only(top: 50),
             child: SingleChildScrollView(
               child: Container(
                 color: Colors.white,
@@ -40,18 +40,18 @@ class _LoginFormState extends State<LoginForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(height: 30),
                     CovidLogo(),
-                    SizedBox(height: 40),
+                    SizedBox(height: 10),
                     Container(
                       alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(5),
+                      margin: EdgeInsets.all(20),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
                         },
                         child: Text(
-                          'Welcome',
+                          'Register',
                           style: TextStyle(
                             color: kLightAccent,
                             fontSize: 35,
@@ -63,16 +63,13 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          RegisterScreen.routeName,
-                        );
+                        Navigator.pop(context);
                       },
                       child: Container(
                         alignment: Alignment.centerRight,
                         margin: EdgeInsets.fromLTRB(0, 0, 20, 10),
                         child: Text(
-                          'Register',
+                          'Login',
                           style: TextStyle(
                             color: kLightAccent,
                             fontSize: 14,
@@ -83,6 +80,12 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                     ),
                     CustomTextFormField(
+                      labelText: kUsername,
+                      controller: _usernameController,
+                      prefixIconData: Icons.person_pin_circle_sharp,
+                    ),
+                    SizedBox(height: 20),
+                    CustomTextFormField(
                       labelText: kEmail,
                       controller: _emailController,
                       prefixIconData: Icons.email,
@@ -92,6 +95,11 @@ class _LoginFormState extends State<LoginForm> {
                       labelText: kPassword,
                       controller: _passwordController,
                     ),
+                    SizedBox(height: 20),
+                    CustomPasswordFormField(
+                      labelText: kConfirmPassword,
+                      controller: _passwordController,
+                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -99,10 +107,10 @@ class _LoginFormState extends State<LoginForm> {
                       width: MediaQuery.of(context).size.width / 1.2,
                       height: 50,
                       child: CustomRaisedButton(
-                        labelText: "Login",
+                        labelText: "Register",
                         textColor: Colors.white,
                         radius: 10,
-                        onPressed: signIn,
+                        onPressed: signUp,
                         fillColor: kLightAccent,
                       ),
                     ),
@@ -113,7 +121,7 @@ class _LoginFormState extends State<LoginForm> {
                       child: RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                            text: 'Forgot password? ',
+                            text: 'Already have account? ',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
@@ -122,7 +130,9 @@ class _LoginFormState extends State<LoginForm> {
                             ),
                           ),
                           TextSpan(
-                            text: 'Click here... ',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.pop(context),
+                            text: 'Login here... ',
                             style: TextStyle(
                               color: kLightAccent,
                               fontSize: 14,
@@ -141,7 +151,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
         );
       },
-      listener: (BuildContext context, GraphqlState state) {
+      listener: (context, state) {
         if (state is GraphqlLoadingState) {
           Dialogs.showLoadingDialog(context);
         } else if (state is GraphqlErrorState) {
@@ -152,16 +162,12 @@ class _LoginFormState extends State<LoginForm> {
           Dialogs.closeLoadingDialog(context);
 
           if (state.data != null) {
-            if (state.data[kLogin]['error'] != null) {
-              String message = state.data[kLogin]['error']['message'];
+            if (state.data[kRegister]['error'] != null) {
+              String message = state.data[kRegister]['error']['message'];
               Dialogs.showGeneralDialog(context, text: message);
             } else {
-              loadToast('Successfully logged in..', context);
-              String token = state.result.data[kLogin]['token'];
-              Provider.of<AppState>(context, listen: false)
-                ..token = token
-                ..updateHiveDB();
-              showBaseScreen();
+              loadToast('Successfully registered..', context);
+              showLoginScreen();
             }
           }
         }
@@ -169,19 +175,18 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void showBaseScreen() {
+  void showLoginScreen() {
     Navigator.pushReplacementNamed(
       context,
-      BaseScreen.routeName,
+      LoginScreen.routeName,
     );
   }
 
-  void signIn() async {
+  void signUp() async {
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
-    String fcmToken = await FirebaseMessaging.instance.getToken();
-
+    String username = _usernameController.text.trim();
     context.read<AuthenticateBloc>()
-      ..login(email: email, password: password, fcmToken: fcmToken);
+      ..register(email: email, password: password, username: username);
   }
 }

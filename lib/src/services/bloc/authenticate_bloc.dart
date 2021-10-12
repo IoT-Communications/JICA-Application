@@ -3,6 +3,7 @@ import 'package:jica/src/api/graphql/operations/mutation/auth_mutation.dart';
 import 'package:jica/src/api/graphql/operations/query/user_query.dart';
 import 'package:jica/src/core/models/user.dart';
 import 'package:jica/src/services/bloc/base_graphql_bloc.dart';
+import 'package:jica/src/utils/debugBro.dart';
 import 'package:jica/src/utils/mutation_options.dart';
 import 'package:jica/src/utils/query_options.dart';
 
@@ -24,8 +25,7 @@ class AuthenticateBloc extends BaseGraphqlBloc<Map<String, dynamic>> {
     };
     add(GraphqlQueryEvent<Map<String, dynamic>>(
         data: parseData(variables),
-        options:
-            customQueryOptions(query: signinMutation, variables: variables)));
+        options: customQueryOptions(query: signInQuery, variables: variables)));
   }
 
   void register({

@@ -1,15 +1,3 @@
-String signinMutation = """
-mutation login(\$email:String!, \$password:String!, \$fcmToken:String!){
-  login(email:\$email,password:\$password, fcmToken:\$fcmToken){
-    error{
-      path
-      message
-    }
-    token
-  }
-}
-""";
-
 String signupMutation = """
 mutation register(\$email:String!, \$password:String!,\$username:String!){
   register(email:\$email,password:\$password,username:\$username){

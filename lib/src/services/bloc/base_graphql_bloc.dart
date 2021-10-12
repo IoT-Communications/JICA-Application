@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
-import 'package:jica/src/api/repository/base_repository.dart';
-import 'package:jica/src/utils/debugBro.dart';
-import 'package:jica/src/utils/query_options.dart';
-import 'package:jica/src/utils/subscription_options.dart';
+import 'package:plug/src/api/repository/base_repository.dart';
+import 'package:plug/src/utils/debugBro.dart';
+import 'package:plug/src/utils/query_options.dart';
+import 'package:plug/src/utils/subscription_options.dart';
 part '../../api/graphql/graphql_event.dart';
 part '../../providers/graphql_state.dart';
 
@@ -64,6 +64,7 @@ abstract class BaseGraphqlBloc<T>
       } else if (event is GraphqlMutateEvent<T>) {
         try {
           QueryResult queryResults = await repository.runMutate(event.options);
+          logger.wtf(queryResults.exception);
           if (queryResults.data == null) {
             yield GraphqlErrorState<T>(
                 error: queryResults.exception, result: queryResults);
