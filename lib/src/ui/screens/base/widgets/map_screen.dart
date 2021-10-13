@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jica/src/core/models/device_location.dart';
 import 'package:jica/src/ui/screens/base/widgets/directions_model.dart';
 import 'package:jica/src/ui/screens/base/widgets/directions_repository.dart';
+import 'package:jica/src/ui/screens/base/widgets/map_direction_screen.dart';
 import 'package:jica/src/utils/debugBro.dart';
 
 class MapScreen extends StatefulWidget {
@@ -21,8 +22,6 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   GoogleMapController _googleMapController;
-  Marker _origin;
-  Marker _destination;
   Directions _info;
   Set<Marker> markers = Set();
   int countMarkers = 0;
@@ -84,7 +83,6 @@ class _MapScreenState extends State<MapScreen> {
                       .toList(),
                 ),
             },
-            onLongPress: _addMarker,
           ),
           if (_info != null)
             Positioned(
@@ -129,39 +127,15 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  void _addMarker(LatLng pos) async {
-    if (_origin == null || (_origin != null && _destination != null)) {
-      // Origin is not set OR Origin/Destination are both set
-      // Set origin
-      setState(() {
-        _origin = Marker(
-          markerId: const MarkerId('origin'),
-          infoWindow: const InfoWindow(title: 'Origin'),
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-          position: pos,
-        );
-        // Reset destination
-        _destination = null;
-
-        // Reset info
-        _info = null;
-      });
-    } else {
-      // Origin is already set
-      // Set destination
-      setState(() {
-        _destination = Marker(
-          markerId: const MarkerId('destination'),
-          infoWindow: const InfoWindow(title: 'Destination'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          position: pos,
-        );
-      });
-
-      // Get directions
-    }
+  onMarkerTapped({String deviceId, List<DeviceLocation> routeDetails}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MapDirectionScreen(
+          deviceId: deviceId,
+          routes: routeDetails,
+        ),
+      ),
+    );
   }
-
-  onMarkerTapped({String deviceId, List<DeviceLocation> routeDetails}) {}
 }
