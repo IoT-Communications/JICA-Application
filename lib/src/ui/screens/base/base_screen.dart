@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jica/src/core/models/device_location.dart';
 import 'package:jica/src/services/bloc/base_graphql_bloc.dart';
-import 'package:jica/src/services/bloc/device_location_bloc.dart';
+import 'package:jica/src/services/bloc/device_bloc.dart';
 import 'package:jica/src/ui/screens/base/widgets/map_screen.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/debugBro.dart';
@@ -16,9 +16,9 @@ class BaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DeviceLocationBloc>(
-      create: (context) => DeviceLocationBloc(),
-      child: BlocConsumer<DeviceLocationBloc, GraphqlState>(
+    return BlocProvider<DeviceBloc>(
+      create: (context) => DeviceBloc(),
+      child: BlocConsumer<DeviceBloc, GraphqlState>(
         builder: (BuildContext context, GraphqlState state) {
           if (state is GraphqlInitialState) {
             getDeviceLocations(context);
@@ -161,6 +161,6 @@ class BaseScreen extends StatelessWidget {
   Future<void> signOut(BuildContext context) async {}
 
   void getDeviceLocations(BuildContext context) {
-    context.read<DeviceLocationBloc>()..getDeviceLocations();
+    context.read<DeviceBloc>()..getDeviceLocations();
   }
 }

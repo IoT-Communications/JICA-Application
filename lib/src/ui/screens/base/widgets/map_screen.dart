@@ -22,6 +22,7 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   GoogleMapController _googleMapController;
+
   Directions _info;
   Set<Marker> markers = Set();
   int countMarkers = 0;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:jica/src/core/models/device_location.dart';
-import 'package:jica/src/ui/screens/base/widgets/device_information.dart';
+import 'package:jica/src/ui/screens/base/widgets/battery_device_information.dart';
 import 'package:jica/src/ui/screens/base/widgets/google_maps_services.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/debugBro.dart';
@@ -74,9 +74,9 @@ class _MapDirectionScreenState extends State<MapDirectionScreen> {
           .format(parsedDateFormat)
           .toString(); // convert local date time to string format local date time
 
-      _addMarker(latLng, "Last Seen", formatedDateTime,
-          i == widget.routes.length - 1 ? 0 : 1);
-      _source = latLng;
+      if (i == widget.routes.length - 1 || i == 0)
+        _addMarker(latLng, "Last Seen", formatedDateTime, i);
+
       if (i != 0) {
         _destination = latLng;
         _googleMapsServices
@@ -84,11 +84,15 @@ class _MapDirectionScreenState extends State<MapDirectionScreen> {
             .then((route) {
           // }
           if (route != null) {
-            createRoute(route, randomString(100));
-            hasNoRoute = true;
+            setState(() {
+              createRoute(route, randomString(100));
+              hasNoRoute = true;
+            });
           }
         });
+        _source = latLng;
       } else {
+        _source = latLng;
         _center = latLng;
       }
     }
@@ -163,22 +167,24 @@ class _MapDirectionScreenState extends State<MapDirectionScreen> {
                   zoomGesturesEnabled: true,
                   buildingsEnabled: true,
                 ),
-          DeviceInformation(),
-          DeviceInformation(),
-          DeviceInformation(),
-          DeviceInformation(),
-          DeviceInformation(),
+          BatteryDeviceInformation(),
+          BatteryDeviceInformation(),
+          BatteryDeviceInformation(),
+          BatteryDeviceInformation(),
+          BatteryDeviceInformation(),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          setState(() {
-            getCoodinates();
-          });
-        },
-        label: Text('Refresh Routes'),
-        icon: Icon(Icons.directions_sharp),
-      ),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                setState(() {
+                  getCoodinates();
+                });
+              },
+              label: Text('Refresh Routes'),
+              icon: Icon(Icons.directions_sharp),
+            )
+          : SizedBox.shrink(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -290,25 +296,25 @@ class _MapDirectionScreenState extends State<MapDirectionScreen> {
     String _title = '';
     switch (index) {
       case 0:
-        _title = 'Device Location Information';
+        _title = 'Device Location Info';
         break;
       case 1:
-        _title = 'Device Battery Information';
+        _title = 'Device Battery Info';
         break;
 
       case 2:
-        _title = 'Device Health Information';
+        _title = 'Device Health Info';
         break;
 
       case 3:
-        _title = 'Device Temperature Information';
+        _title = 'Device Temperature Info';
         break;
 
       case 4:
-        _title = 'Device Alarm Information';
+        _title = 'Device Alarm Info';
         break;
       case 5:
-        _title = 'Device SOS Information';
+        _title = 'Device SOS Info';
         break;
 
       default:
