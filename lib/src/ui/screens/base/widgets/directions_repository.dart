@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jica/src/ui/screens/base/widgets/directions_model.dart';
+import 'package:jica/src/core/models/directions_model.dart';
 
 class DirectionsRepository {
   static const String _baseUrl =

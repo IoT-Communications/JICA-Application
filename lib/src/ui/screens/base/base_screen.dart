@@ -134,6 +134,7 @@ class BaseScreen extends StatelessWidget {
             Dialogs.showLoadingDialog(context, message: 'Loading devices...');
           } else if (state is GraphqlLoadedState) {
             Dialogs.closeLoadingDialog(context);
+            logger.e(state.data);
             Map error = state.data['getDeviceLocations']['error'];
             if (error != null) {
               Dialogs.showGeneralDialog(
@@ -152,6 +153,9 @@ class BaseScreen extends StatelessWidget {
               _groupedDeviceLocations = groupBy(_deviceLocations,
                   (deviceLocation) => deviceLocation.deviceID);
             }
+          }
+          if (state is GraphqlErrorState) {
+            Dialogs.closeLoadingDialog(context);
           }
         },
       ),

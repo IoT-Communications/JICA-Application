@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jica/src/core/models/device_location.dart';
-import 'package:jica/src/ui/screens/base/widgets/directions_model.dart';
+import 'package:jica/src/core/models/directions_model.dart';
 import 'package:jica/src/ui/screens/base/widgets/directions_repository.dart';
 import 'package:jica/src/ui/screens/base/widgets/map_direction_screen.dart';
 import 'package:jica/src/utils/debugBro.dart';

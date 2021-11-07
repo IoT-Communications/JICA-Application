@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jica/src/providers/app_state.dart';
+import 'package:jica/src/services/bloc/device_bloc.dart';
 import 'package:jica/src/ui/screens/base/base_screen.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/routes.dart';
@@ -23,6 +25,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppState>(create: (_) => AppState()),
+      BlocProvider(create: (context) => DeviceBloc()),
     ],
     child: MyApp(),
   ));

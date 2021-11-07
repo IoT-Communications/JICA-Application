@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:jica/src/core/models/device_location.dart';
+import 'package:jica/src/ui/screens/base/widgets/alarm_device_information.dart';
 import 'package:jica/src/ui/screens/base/widgets/battery_device_information.dart';
-import 'package:jica/src/ui/screens/base/widgets/google_maps_services.dart';
+import 'package:jica/src/services/google_maps_services.dart';
+import 'package:jica/src/ui/screens/base/widgets/health_device_information.dart';
+import 'package:jica/src/ui/screens/base/widgets/sos_device_information.dart';
+import 'package:jica/src/ui/screens/base/widgets/temp_device_information.dart';
 import 'package:jica/src/utils/colors.dart';
 import 'package:jica/src/utils/debugBro.dart';
 import 'package:jica/src/utils/routes.dart';
@@ -167,11 +171,21 @@ class _MapDirectionScreenState extends State<MapDirectionScreen> {
                   zoomGesturesEnabled: true,
                   buildingsEnabled: true,
                 ),
-          BatteryDeviceInformation(),
-          BatteryDeviceInformation(),
-          BatteryDeviceInformation(),
-          BatteryDeviceInformation(),
-          BatteryDeviceInformation(),
+          BatteryDeviceInformation(
+            deviceID: widget.deviceId,
+          ),
+          HealthDeviceInformation(
+            deviceID: widget.deviceId,
+          ),
+          DeviceTemperatureInformation(
+            deviceID: widget.deviceId,
+          ),
+          DeviceAlarmInformation(
+            deviceID: widget.deviceId,
+          ),
+          DeviceSOSInformation(
+            deviceID: widget.deviceId,
+          ),
         ],
       ),
       floatingActionButton: _selectedIndex == 0
